@@ -3,8 +3,8 @@ import { AcracsInput, ScoreBreakdown } from "../types";
 import { LOCATIONS, SECTORS, YEARS_IN_BUSINESS, RESOURCE_DEPENDENCY } from "../constants";
 
 export const generateRiskAnalysis = async (inputs: AcracsInput, scores: { final: number, breakdown: ScoreBreakdown }, lang: 'en' | 'bn'): Promise<string> => {
-  // FIX: Initialize GoogleGenAI with API_KEY from process.env as per guidelines, which also fixes the TypeScript error.
-  // The API key is assumed to be available in the environment.
+  // FIX: Use process.env.API_KEY as per the guidelines to resolve the TypeScript error.
+  // Initialize GoogleGenAI with the API key from environment variables.
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
   const locationLabel = LOCATIONS.find(l => l.value === inputs.location)?.label[lang] || 'N/A';
