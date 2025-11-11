@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ACRACS: Adaptive Credit Scoring Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
+    "jspdf": "https://aistudiocdn.com/jspdf@^2.5.1",
+    "html2canvas": "https://aistudiocdn.com/html2canvas@^1.4.1"
+  }
+}
+</script>
+<style>
+  .fade-in-up {
+    animation: fadeInUp 0.7s ease-out forwards;
+    opacity: 0;
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Staggered animation delay for sections */
+  .section-container > * {
+    opacity: 0; /* Initially hidden */
+  }
+  .section-container > .fade-in-up:nth-child(1) { animation-delay: 0.1s; }
+  .section-container > .fade-in-up:nth-child(2) { animation-delay: 0.2s; }
+  .section-container > .fade-in-up:nth-child(3) { animation-delay: 0.3s; }
+  .section-container > .fade-in-up:nth-child(4) { animation-delay: 0.4s; }
+
+  /* Transitions for form elements for a smoother feel */
+  input, select, textarea, button {
+    transition: all 0.2s ease-in-out;
+  }
+  input:focus, select:focus, textarea:focus {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4); /* blue-500 with opacity */
+    border-color: #3B82F6; /* blue-500 */
+  }
+  
+  /* AI Analysis container animation */
+  .ai-analysis-container {
+    transition: opacity 0.5s ease-out, max-height 0.6s ease-out;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+  .ai-analysis-container.visible {
+    max-height: 1500px; /* Large enough to not clip content */
+    opacity: 1;
+  }
+</style>
+</head>
+  <body class="bg-slate-50">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
