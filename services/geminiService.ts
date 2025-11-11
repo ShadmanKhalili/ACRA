@@ -1,8 +1,12 @@
+import { GoogleGenAI } from "@google/genai";
 import { AcracsInput, ScoreBreakdown } from "../types";
 import { LOCATIONS, SECTORS, YEARS_IN_BUSINESS, RESOURCE_DEPENDENCY } from "../constants";
 
 export const generateRiskAnalysis = async (inputs: AcracsInput, scores: { final: number, breakdown: ScoreBreakdown }, lang: 'en' | 'bn'): Promise<string> => {
-  
+  // FIX: Initialize GoogleGenAI with API_KEY from process.env as per guidelines, which also fixes the TypeScript error.
+  // The API key is assumed to be available in the environment.
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
   const locationLabel = LOCATIONS.find(l => l.value === inputs.location)?.label[lang] || 'N/A';
   const sectorLabel = SECTORS.find(s => s.value === inputs.sector)?.label[lang] || 'N/A';
   const yearsLabel = YEARS_IN_BUSINESS.find(y => y.value === inputs.yearsInBusiness)?.label[lang] || 'N/A';
@@ -134,6 +138,7 @@ export const generateRiskAnalysis = async (inputs: AcracsInput, scores: { final:
     optionalFinancials += `\n    - ${t.cashOnHand}: ${inputs.cashOnHand.toLocaleString()}`;
   }
 
+
   const prompt = `
     ${t.promptRole}
     ${t.languageDirection}
@@ -170,29 +175,13 @@ export const generateRiskAnalysis = async (inputs: AcracsInput, scores: { final:
     `;
 
   try {
-    const response = await fetch('/.netlify/functions/generate-analysis', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ prompt }),
+    const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: prompt,
     });
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({})); // Handle cases where the error response isn't JSON
-      console.error(`Error from Netlify function: ${response.status}`, errorData);
-      return lang === 'bn' 
-        ? "সার্ভার থেকে বিশ্লেষণ আনতে একটি ত্রুটি হয়েছে।"
-        : "An error occurred fetching the analysis from the server.";
-    }
-
-    const data = await response.json();
-    return data.analysis;
-
+    return response.text;
   } catch (error) {
-    console.error("Network error calling generate-analysis function:", error);
-    return lang === 'bn' 
-      ? "বিশ্লেষণ তৈরি করার সময় একটি নেটওয়ার্ক ত্রুটি ঘটেছে।" 
-      : "A network error occurred while generating the analysis.";
+    console.error("Error generating risk analysis:", error);
+    return lang === 'bn' ? "বিশ্লেষণ তৈরি করার সময় একটি ত্রুটি ঘটেছে। বিস্তারিত জানতে কনসোল চেক করুন।" : "An error occurred while generating the analysis. Please check the console for details.";
   }
 };
