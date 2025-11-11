@@ -3,11 +3,11 @@ import { AcracsInput } from './types';
 import { WeightPresetProfile } from './types';
 
 export const LOCATIONS = [
-  { value: 'khulna', label: { en: 'Khulna (Coastal - Salinity, Cyclone)', bn: 'খুলনা (উপকূলীয় - লবণাক্ততা, ঘূর্ণিঝড়)' } },
-  { value: 'rajshahi', label: { en: 'Rajshahi (Drought-prone)', bn: 'রাজশাহী (খরা-প্রবণ)' } },
-  { value: 'sylhet', label: { en: 'Sylhet (Flash Floods)', bn: 'সিলেট (আকস্মিক বন্যা)' } },
-  { value: 'chattogram_hills', label: { en: 'Chattogram Hill Tracts (Landslides)', bn: 'চট্টগ্রাম পার্বত্য অঞ্চল (ভূমিধস)' } },
-  { value: 'haor_region', label: { en: 'Haor Region (Seasonal Flooding)', bn: 'হাওর অঞ্চল (মৌসুমী বন্যা)' } },
+  { value: 'khulna', label: { en: 'Khulna (Coastal)', bn: 'খুলনা (উপকূলীয়)' }, risks: { en: 'Salinity, Cyclones', bn: 'লবণাক্ততা, ঘূর্ণিঝড়' } },
+  { value: 'rajshahi', label: { en: 'Rajshahi (Drought-prone)', bn: 'রাজশাহী (খরা-প্রবণ)' }, risks: { en: 'Drought', bn: 'খরা' } },
+  { value: 'sylhet', label: { en: 'Sylhet (Flash Floods)', bn: 'সিলেট (আকস্মিক বন্যা)' }, risks: { en: 'Flash Floods', bn: 'আকস্মিক বন্যা' } },
+  { value: 'chattogram_hills', label: { en: 'Chattogram Hill Tracts', bn: 'চট্টগ্রাম পার্বত্য অঞ্চল' }, risks: { en: 'Landslides', bn: 'ভূমিধস' } },
+  { value: 'haor_region', label: { en: 'Haor Region (Seasonal Flooding)', bn: 'হাওর অঞ্চল (মৌসুমী বন্যা)' }, risks: { en: 'Seasonal Flooding', bn: 'মৌসুমী বন্যা' } },
   { value: 'other', label: { en: 'Other', bn: 'অন্যান্য' } },
 ];
 

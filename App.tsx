@@ -48,6 +48,7 @@ const App: React.FC = () => {
   const [activeWeightPreset, setActiveWeightPreset] = useState<WeightPresetProfile>('balanced');
   const [aiAnalysis, setAiAnalysis] = useState('');
   const [isLoadingAi, setIsLoadingAi] = useState(false);
+  const [aiFeedback, setAiFeedback] = useState<'up' | 'down' | null>(null);
   const { language } = useLanguage();
   const t = translations[language];
 
@@ -56,6 +57,7 @@ const App: React.FC = () => {
   const handleStartOver = () => {
     setInputs(initialInputs);
     setAiAnalysis('');
+    setAiFeedback(null);
     setCurrentPage(1);
   };
   
@@ -152,11 +154,16 @@ const App: React.FC = () => {
   const handleGenerateAnalysis = async () => {
     setIsLoadingAi(true);
     setAiAnalysis('');
+    setAiFeedback(null);
     const analysis = await generateRiskAnalysis(inputs, { final: score, breakdown }, language);
     setAiAnalysis(analysis);
     setIsLoadingAi(false);
   };
   
+  const handleAiFeedback = (feedback: 'up' | 'down') => {
+    setAiFeedback(feedback);
+  };
+
   const handleDownloadCSV = useCallback(() => {
     const { enterpriseName, isWomanLed, location, sector, debtToEquity, yearlyProfit, monthlyRevenue, monthlyExpenses, cashOnHand, yearsInBusiness, employees, resourceDependency, resilienceMeasures } = inputs;
     const t_csv = translations[language].csv;
@@ -273,8 +280,10 @@ const App: React.FC = () => {
                 activeWeightPreset={activeWeightPreset}
                 aiAnalysis={aiAnalysis}
                 isLoadingAi={isLoadingAi}
+                aiFeedback={aiFeedback}
                 handleWeightChange={handleWeightChange}
                 handleGenerateAnalysis={handleGenerateAnalysis}
+                handleAiFeedback={handleAiFeedback}
                 handleDownloadCSV={handleDownloadCSV}
                 renderAiAnalysis={renderAiAnalysis}
                 onPrev={handlePrev}

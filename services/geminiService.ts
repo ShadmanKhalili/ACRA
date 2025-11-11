@@ -82,8 +82,11 @@ export const generateRiskAnalysis = async (inputs: AcracsInput, scores: { final:
           acs: "Actions to Protect Business (Adaptive Capacity)",
           task: "Your Task (in simple language, using Markdown formatting):",
           task1: `1.  **Overall Summary:** Start with a simple risk level ("Low Risk," "Medium Risk," or "High Risk") and briefly explain what the final score means in one sentence. Use **bold** for the risk level.`,
-          task2: "2.  **Your Strengths (What you are doing well):** Create a bulleted list using \"-\" for 2-3 key positive points. If they provided details on their actions, praise their specific efforts.",
-          task3: "3.  **Areas to Improve (Suggestions to get a better score):** Create a bulleted list using \"-\" for 1-2 friendly, actionable suggestions. Explain *why* these suggestions will help make their business stronger and more loan-ready. Frame this as helpful advice, not criticism."
+          task2: `2.  **Your Strengths (What you are doing well):** Create a bulleted list using "-" for 2-3 key positive points. If they provided details on their actions, praise their specific efforts.`,
+          task3: `3.  **Top Suggestions for Growth (How to get a better score):** Create a bulleted list using "-" for the **top 2-3 most impactful suggestions** for this specific business. Prioritize suggestions based on the lowest scores in the breakdown (Financial, Stability, or Adaptive Capacity). For each suggestion, provide:
+    - A **clear action** (e.g., "Consider creating a written business plan.")
+    - The **reason why** it helps, linking it to a score category (e.g., "This improves your 'Business Stability' score and shows lenders you have a clear vision.")
+    - A **simple first step** (e.g., "Start by writing down your business goals for the next 6-12 months.")`
       },
       bn: {
           promptRole: "গ্রামীণ বাংলাদেশের একজন ক্ষুদ্র উদ্যোক্তার জন্য বন্ধুত্বপূর্ণ, উৎসাহব্যঞ্জক ব্যবসায়িক উপদেষ্টা হিসেবে কাজ করুন।",
@@ -113,8 +116,11 @@ export const generateRiskAnalysis = async (inputs: AcracsInput, scores: { final:
           acs: "ব্যবসা রক্ষার পদক্ষেপ (অভিযোজন ক্ষমতা)",
           task: "আপনার কাজ (সহজ ভাষায়, মার্কডাউন ফরম্যাটিং ব্যবহার করে):",
           task1: `১. **সামগ্রিক সারসংক্ষেপ:** একটি সাধারণ ঝুঁকির স্তর ("কম ঝুঁকি," "মাঝারি ঝুঁকি," বা "উচ্চ ঝুঁকি") দিয়ে শুরু করুন এবং চূড়ান্ত স্কোরের অর্থ কী তা এক বাক্যে সংক্ষেপে ব্যাখ্যা করুন। ঝুঁকির স্তরের জন্য **বোল্ড** ব্যবহার করুন।`,
-          task2: "২. **আপনার শক্তি (আপনি যা ভালো করছেন):** ২-৩টি মূল ইতিবাচক পয়েন্টের জন্য \"-\" ব্যবহার করে একটি বুলেটযুক্ত তালিকা তৈরি করুন। যদি তারা তাদের পদক্ষেপের বিবরণ দিয়ে থাকে, তবে তাদের নির্দিষ্ট প্রচেষ্টার প্রশংসা করুন।",
-          task3: "৩. **উন্নতির ক্ষেত্র (আরও ভালো স্কোর পাওয়ার জন্য পরামর্শ):** ১-২টি বন্ধুত্বপূর্ণ, কার্যকর পরামর্শের জন্য \"-\" ব্যবহার করে একটি বুলেটযুক্ত তালিকা তৈরি করুন। ব্যাখ্যা করুন *কেন* এই পরামর্শগুলি তাদের ব্যবসাকে আরও শক্তিশালী এবং ঋণ-প্রস্তুত করতে সাহায্য করবে। এটিকে সহায়ক পরামর্শ হিসাবে উপস্থাপন করুন, সমালোচনা হিসাবে নয়।"
+          task2: `২. **আপনার শক্তি (আপনি যা ভালো করছেন):** ২-৩টি মূল ইতিবাচক পয়েন্টের জন্য "-" ব্যবহার করে একটি বুলেটযুক্ত তালিকা তৈরি করুন। যদি তারা তাদের পদক্ষেপের বিবরণ দিয়ে থাকে, তবে তাদের নির্দিষ্ট প্রচেষ্টার প্রশংসা করুন।`,
+          task3: `৩. **ব্যবসা বৃদ্ধির জন্য শীর্ষ পরামর্শ (কীভাবে আরও ভালো স্কোর পাবেন):** স্কোর ভাঙ্গনের সর্বনিম্ন স্কোরের উপর ভিত্তি করে এই ব্যবসার জন্য **সবচেয়ে প্রভাবশালী শীর্ষ ২-৩টি পরামর্শের** জন্য "-" ব্যবহার করে একটি বুলেটযুক্ত তালিকা তৈরি করুন। প্রতিটি পরামর্শের জন্য, প্রদান করুন:
+    - একটি **পরিষ্কার পদক্ষেপ** (যেমন, "একটি লিখিত ব্যবসায়িক পরিকল্পনা তৈরির কথা বিবেচনা করুন।")
+    - এটি **কেন সাহায্য করে** তার কারণ, এটিকে একটি স্কোর বিভাগের সাথে লিঙ্ক করে (যেমন, "এটি আপনার 'ব্যবসায়িক স্থিতিশীলতা' স্কোর উন্নত করে এবং ঋণদাতাদের দেখায় যে আপনার একটি সুস্পষ্ট লক্ষ্য আছে।")
+    - একটি **সহজ প্রথম পদক্ষেপ** (যেমন, "আগামী ৬-১২ মাসের জন্য আপনার ব্যবসার লক্ষ্যগুলি লিখে শুরু করুন।")`
       }
   };
 

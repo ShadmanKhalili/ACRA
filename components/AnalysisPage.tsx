@@ -66,7 +66,7 @@ export const AnalysisPage: React.FC<AnalysisPageProps> = (props) => {
                         const measure = RESILIENCE_LABELS[key];
                         return (
                          <div key={key} className="space-y-2">
-                             <label className="relative flex items-start gap-3 cursor-pointer">
+                             <label className="relative group flex items-start gap-3 cursor-pointer">
                                  <div className="flex h-5 items-center">
                                      <input id={key} name={key} type="checkbox" checked={inputs.resilienceMeasures[key].checked} onChange={handleResilienceChange} className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
                                  </div>
@@ -76,6 +76,11 @@ export const AnalysisPage: React.FC<AnalysisPageProps> = (props) => {
                                         <span>{measure.label[language]}</span>
                                      </span>
                                  </div>
+                                {measure.placeholder[language] && (
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs px-3 py-1.5 text-xs font-normal text-white bg-gray-900 rounded-lg shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none">
+                                        {measure.placeholder[language]}
+                                    </div>
+                                )}
                              </label>
                              {measure.hasDetails && inputs.resilienceMeasures[key].checked && (
                                 <textarea

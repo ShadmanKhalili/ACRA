@@ -29,6 +29,8 @@ const FormField: React.FC<FormFieldProps> = ({ label, helper, children }) => (
 export const BusinessInfoPage: React.FC<BusinessInfoPageProps> = ({ inputs, handleInputChange, onNext, onPrev }) => {
   const { language } = useLanguage();
   const t = translations[language];
+  
+  const selectedLocation = LOCATIONS.find(loc => loc.value === inputs.location);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -42,11 +44,23 @@ export const BusinessInfoPage: React.FC<BusinessInfoPageProps> = ({ inputs, hand
                         {SECTORS.map(opt => <option key={opt.value} value={opt.value}>{opt.label[language]}</option>)}
                     </select>
                 </FormField>
-                <FormField label={t.sections.about.location.label} helper={t.sections.about.location.helper}>
-                    <select name="location" value={inputs.location} onChange={handleInputChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                        {LOCATIONS.map(opt => <option key={opt.value} value={opt.value}>{opt.label[language]}</option>)}
-                    </select>
-                </FormField>
+                <div>
+                    <FormField label={t.sections.about.location.label} helper={t.sections.about.location.helper}>
+                        <select name="location" value={inputs.location} onChange={handleInputChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                            {LOCATIONS.map(opt => <option key={opt.value} value={opt.value}>{opt.label[language]}</option>)}
+                        </select>
+                    </FormField>
+                    {selectedLocation && selectedLocation.risks && (
+                        <div className="mt-2 p-2 bg-amber-50 text-amber-900 border-l-4 border-amber-400 text-xs rounded-r-md flex items-start gap-2">
+                           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.21 3.03-1.742 3.03H4.42c-1.532 0-2.492-1.696-1.742-3.03l5.58-9.92zM10 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                            </svg>
+                            <div>
+                                <span className="font-semibold">{t.sections.about.primaryRisks}:</span> {selectedLocation.risks[language]}
+                            </div>
+                        </div>
+                    )}
+                </div>
                 <FormField label={t.sections.about.years.label} helper={t.sections.about.years.helper}>
                     <select name="yearsInBusiness" value={inputs.yearsInBusiness} onChange={handleInputChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
                         {YEARS_IN_BUSINESS.map(opt => <option key={opt.value} value={opt.value}>{opt.label[language]}</option>)}
