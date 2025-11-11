@@ -14,7 +14,8 @@
     "jspdf": "^3.0.3",
     "@google/genai": "^1.29.0",
     "recharts": "^3.4.1",
-    "html2canvas": "^1.4.1"
+    "html2canvas": "^1.4.1",
+    "@netlify/functions": "^5.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
